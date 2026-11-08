@@ -3,12 +3,10 @@
 use Flarum\Extend;
 use Flarum\User\Event\Deleted;
 use Flarum\User\Event\LoggedIn;
-use Flarum\User\Event\LoggedOut;
 use Flarum\User\Event\Registered;
 use Flarum\User\Event\Saving;
 use Maicol07\SSO\JWTSSOController;
 use Maicol07\SSO\Listener\ActivateUser;
-use Maicol07\SSO\Listener\AddLogoutRedirect;
 use Maicol07\SSO\Listener\LoadSettingsFromDatabase;
 use Maicol07\SSO\Listener\ProviderModeListener;
 use Maicol07\SSO\Listener\UserUpdated;
@@ -42,7 +40,6 @@ return [
     // Events
     (new Extend\Event())
         ->listen(Registered::class, ActivateUser::class)
-        ->listen(LoggedOut::class, AddLogoutRedirect::class)
         ->listen(Saving::class, UserUpdated::class)
         ->subscribe(ProviderModeListener::class)
         ->subscribe(LoadSettingsFromDatabase::class),
